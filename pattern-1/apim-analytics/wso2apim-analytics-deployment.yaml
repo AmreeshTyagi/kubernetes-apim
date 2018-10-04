@@ -15,7 +15,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: wso2apim-with-analytics-apim-analytics-deployment
+  name: apim-analytics-deployment
 spec:
   replicas: 1
   minReadySeconds: 30
@@ -27,11 +27,11 @@ spec:
   template:
     metadata:
       labels:
-        deployment: wso2apim-with-analytics-apim-analytics
+        deployment: apim-analytics-deployment
     spec:
       containers:
-      - name: wso2apim-with-analytics-apim-analytics
-        image: docker.wso2.com/wso2am-analytics:2.5.0
+      - name: apim-analytics-pod
+        image: docker.wso2.com/wso2am-analytics:2.5.0.1.1536338886463
         resources:
           limits:
             memory: "4Gi"
@@ -54,6 +54,8 @@ spec:
           initialDelaySeconds: 250
           periodSeconds: 10
         imagePullPolicy: Always
+        securityContext:
+          runAsUser: 802
         ports:
         -
           containerPort: 9764
@@ -113,27 +115,18 @@ spec:
           containerPort: 6067
           protocol: TCP
         volumeMounts:
-        - name: apim-analytics-conf
-          mountPath: /home/wso2carbon/kubernetes-volumes/am-analytics/conf
-        - name: apim-analytics-conf-datasources
-          mountPath: /home/wso2carbon/kubernetes-volumes/am-analytics/conf-datasources
-        - name: analytics-persistent-disk
-          mountPath: /home/wso2carbon/wso2am-analytics-2.5.0/repository/conf/analytics
-        - name: data-persistent-disk
-          mountPath: /home/wso2carbon/wso2am-analytics-2.5.0/repository/data
+        - name: apim-analytics-repo-conf
+          mountPath: /home/wso2carbon/wso2-config-volume/repository/conf
+        - name: apim-analytics-repo-conf-datasources
+          mountPath: /home/wso2carbon/wso2-config-volume/repository/conf/datasources
       serviceAccountName: "wso2svc-account"
       imagePullSecrets:
       - name: wso2creds
       volumes:
-      - name: apim-analytics-conf
+      - name: apim-analytics-repo-conf
         configMap:
-          name: apim-analytics-conf
-      - name: apim-analytics-conf-datasources
+          name: apim-analytics-repo-conf
+      - name: apim-analytics-repo-conf-datasources
         configMap:
-          name: apim-analytics-conf-datasources
-      - name: analytics-persistent-disk
-        persistentVolumeClaim:
-          claimName: wso2apim-with-analytics-apim-analytics-volume-claim
-      - name: data-persistent-disk
-        persistentVolumeClaim:
-          claimName: wso2apim-with-analytics-apim-analytics-data-volume-claim
+          name: apim-analytics-repo-conf-datasources
+

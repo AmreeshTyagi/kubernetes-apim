@@ -1,11 +1,11 @@
 <datasources-configuration xmlns:svns="http://org.wso2.securevault/configuration">
-  
+
     <providers>
         <provider>org.wso2.carbon.ndatasource.rdbms.RDBMSDataSourceReader</provider>
     </providers>
-  
+
     <datasources>
-      
+
         <datasource>
             <name>WSO2_CARBON_DB</name>
             <description>The datasource used for registry and user manager</description>
@@ -29,16 +29,17 @@
         </datasource>
 
         <datasource>
-            <name>WSO2UM_DB</name>
-            <description>The datasource used by user manager</description>
+            <name>WSO2REG_DB</name>
+            <description>The datasource used for Registry data</description>
             <jndiConfig>
-                <name>jdbc/WSO2UM_DB</name>
+                <name>jdbc/WSO2REG_DB</name>
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:mysql://wso2apim-with-analytics-rdbms-service:3306/WSO2AM_COMMON_DB?autoReconnect=true&amp;useSSL=false</url>
+                    <url>jdbc:mysql://mysql-service:3306/WSO2REG_DB?autoReconnect=true&amp;useSSL=false</url>
                     <username>wso2carbon</username>
                     <password>wso2carbon</password>
+                    <defaultAutoCommit>false</defaultAutoCommit>
                     <driverClassName>com.mysql.jdbc.Driver</driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
@@ -50,18 +51,19 @@
         </datasource>
 
         <datasource>
-            <name>WSO2REG_DB</name>
-            <description>The datasource used by the registry</description>
+            <name>WSO2USER_DB</name>
+            <description>The datasource used for getting statistics to API Manager</description>
             <jndiConfig>
-                <name>jdbc/WSO2REG_DB</name>
+                <name>jdbc/WSO2USER_DB</name>
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:mysql://wso2apim-with-analytics-rdbms-service:3306/WSO2AM_COMMON_DB?autoReconnect=true&amp;useSSL=false</url>
+                    <url>jdbc:mysql://mysql-service:3306/WSO2USER_DB?autoReconnect=true&amp;useSSL=false</url>
                     <username>wso2carbon</username>
                     <password>wso2carbon</password>
+                    <defaultAutoCommit>false</defaultAutoCommit>
                     <driverClassName>com.mysql.jdbc.Driver</driverClassName>
-                    <maxActive>80</maxActive>
+                    <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
                     <validationQuery>SELECT 1</validationQuery>

@@ -15,26 +15,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: apim-service
+  name: mysql-service
 spec:
-  # label keys and values that must match in order to receive traffic for this service
+  type: ClusterIP
   selector:
-    deployment: apim-deployment
+    deployment: mysql-deployment
   ports:
-    # ports that this service should serve on
-    -
-      name: pass-through-http
-      protocol: TCP
-      port: 8280
-    -
-      name: pass-through-https
-      protocol: TCP
-      port: 8243
-    -
-      name: servlet-http
-      protocol: TCP
-      port: 9763
-    -
-      name: servlet-https
-      protocol: TCP
-      port: 9443
+  - name: mysql-port
+    port: 3306
+    targetPort: 3306
+    protocol: TCP
