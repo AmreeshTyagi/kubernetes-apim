@@ -25,5 +25,5 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.139.64.243 
+    server: 10.139.224.216 
     path: "/home/apim-rdbms-data"

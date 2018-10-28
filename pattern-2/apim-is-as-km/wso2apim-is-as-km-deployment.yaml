@@ -32,6 +32,9 @@ spec:
       containers:
       - name: wso2apim-is-as-km
         image: amreeshtyagi/is-km:5.7.0
+        env:
+        - name: JVM_MEM_OPTS
+          value: "-Xms2048m -Xmx2048m"
         livenessProbe:
           exec:
             command:
