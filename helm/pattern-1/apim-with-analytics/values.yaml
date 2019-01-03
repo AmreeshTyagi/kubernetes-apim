@@ -1,8 +1,8 @@
-username: "<USERNAME>"
-password: "<PASSWORD>"
-email: "<EMAIL>"
+username: "amreeshtyagi"
+password: "bat777bat"
+email: "tyagi.amreesh@gmail.com"
 
 namespace: "wso2"
 svcaccount: "wso2svc-account"
-serverIp: "<SERVER_IP>"
-sharedDeploymentLocationPath: "<NFS_LOCATION>"
+serverIp: "10.139.224.216"
+sharedDeploymentLocationPath: "/home/apim-shared-server"
